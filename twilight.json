@@ -7,7 +7,7 @@
         "ar": "ثيم طعام عربي دافئ للمطاعم ومتاجر المأكولات، بتصميم يعكس مذاق الأطباق الشهية.",
         "en": "A warm Arabic food theme for restaurants and food stores, designed to make every dish look delicious."
     },
-    "repository": "https://github.com/your-account/sufra",
+    "repository": "https://github.com/Up-to-code/sufra",
     "author_email": "support@creator-themes.dev",
     "version": "1.0.0",
     "features": [
@@ -204,7 +204,7 @@
     ],
     "components": [
         {
-            "key": "sufra-0001-hero",
+            "key": "09251f1c-6148-407e-a6c9-fee7ae2597c0",
             "title": {
                 "en": "Hero Slider",
                 "ar": "السلايدر الرئيسي"
@@ -297,7 +297,7 @@
             ]
         },
         {
-            "key": "sufra-0002-menu",
+            "key": "0c7dff3f-0788-4c00-80d9-7521341dd7b6",
             "title": {
                 "en": "Quick Menu Links",
                 "ar": "روابط القائمة السريعة"
@@ -414,7 +414,7 @@
             ]
         },
         {
-            "key": "sufra-0003-featured",
+            "key": "eb48d353-7fc3-46d3-936d-0e6cd08d14c3",
             "title": {
                 "en": "Featured Dishes",
                 "ar": "أطباق مميزة"
@@ -474,7 +474,7 @@
             ]
         },
         {
-            "key": "sufra-0004-daily",
+            "key": "4aef8f78-bc0a-4d2e-b291-720b32be5a86",
             "title": {
                 "en": "Today's Menu",
                 "ar": "قائمة اليوم"
@@ -600,7 +600,7 @@
             ]
         },
         {
-            "key": "sufra-0005-offer",
+            "key": "08bbf314-409b-4d56-911b-99bd28ad053b",
             "title": {
                 "en": "Special Offer",
                 "ar": "عرض خاص"
@@ -670,7 +670,7 @@
             ]
         },
         {
-            "key": "sufra-0006-chef",
+            "key": "4dd5a673-1546-44a4-8554-4b9f1fc5d71c",
             "title": {
                 "en": "About the Chef",
                 "ar": "قصة المطبخ"
@@ -717,7 +717,7 @@
             ]
         },
         {
-            "key": "sufra-0007-testimonials",
+            "key": "b03f6773-3ae2-4178-a376-d6893f2cf9f9",
             "title": {
                 "en": "Customer Reviews",
                 "ar": "آراء عملائنا"
@@ -818,7 +818,7 @@
             ]
         },
         {
-            "key": "sufra-0008-features",
+            "key": "bcc67bc7-a874-473e-91e5-853566b68b84",
             "title": {
                 "en": "Store Features",
                 "ar": "ميزات المتجر"
@@ -896,5 +896,6 @@
                 }
             ]
         }
-    ]
+    ],
+    "support_url": "https://salla.com/"
 }
