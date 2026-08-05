@@ -1,0 +1,34 @@
+{#
+| Variable                       | Type     | Description                                                                  |
+|--------------------------------|----------|------------------------------------------------------------------------------|
+| component                      | object   | Merchant settings for fields from twilight.json `component` section           |
+| component.slides[].image       | string   | Image url                                                                     |
+| component.slides[].title       | ?string  |                                                                              |
+| component.slides[].description | ?string  |                                                                              |
+| component.slides[].without_overlay | bool |                                                                              |
+| position                       | int      | Sorting number start from zero                                               |
+#}
+<section data-testid="store-home-hero" class="s-block s-block--hero-slider s-block--full-bg wide-placeholder">
+    <salla-slider
+      id="hero-slider-{{ position }}"
+      auto-play
+      static-when-single
+      slider-config='{"lazy":"false"}'
+      {{ component.slides|length > 1 ? '' : 'show-controls="false"' }}
+      type="fullwidth">
+        <div slot="items">
+            {% for slide in component.slides %}
+                <div class="swiper-slide w-full min-h-[300px] lg:min-h-[528px] bg-dark relative">
+					<div style="background-image: url({{ slide.image }});" class="{{ slide.without_overlay ? '' : 'overlay-bg' }} bg-cover bg-center absolute inset-0"></div>
+                    <div class="flex-center container pb-16 sm:pb-0 home-slider__content relative h-full">
+                        <div class="w-4/6 text-center md:w-7/12 lg:w-5/12 text-white">
+                            <span class="hero-slider__eyebrow inline-block mb-4">{{ trans('blocks.sufra.fresh_daily') }}</span>
+                            <h2 data-swiper-parallax="-500" class="hero-slider__title font-bold leading-tight mb-4">{{ slide.title }}</h2>
+                            <p data-swiper-parallax="-300" class="line-clamp-2 hero-slider__desc">{{ slide.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </salla-slider>
+</section>

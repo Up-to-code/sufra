@@ -1,0 +1,23 @@
+{#
+| Variable             | Type     | Description                                  |
+|----------------------|----------|----------------------------------------------|
+| component            | object   | Merchant settings                            |
+| component.items[]    | array    | List of features                             |
+| component.items[].icon  | string | sicon-* class                              |
+| component.items[].title | string |                                          |
+| component.items[].text  | string |                                          |
+| position             | Int      | Sorting number start from zero               |
+#}
+<section data-testid="store-home-features" class="s-block s-block--features container">
+    <div class="grid grid-cols-[repeat(2,minmax(0,1fr))] md:grid-cols-[repeat(4,minmax(0,1fr))] gap-4 sm:gap-6 xl:gap-8">
+        {% for item in component.items %}
+            <div class="s-block--features__item">
+                <div class="feature-icon">
+                    <i class="{{ item.icon }}"></i>
+                </div>
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>

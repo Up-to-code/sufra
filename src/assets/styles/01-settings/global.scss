@@ -1,0 +1,27 @@
+
+// Sufra palette
+$main-color: var(--color-primary);
+$infinte-color: var(--infinte-color);
+$main-text-color: var(--main-text-color);
+
+:root {
+  --infinte-color: #c9c9c9;
+  --main-text-color: #2b2018;
+
+  /* current */
+  --color-primary: #c2410c;
+  --color-primary-d: #9a3412;
+  --color-primary-l: #ea580c;
+  --color-primary-reverse: #fff7ed;
+  --color-text: #7c6a5a;
+  --bg-gray: #c6c7ce1a;
+  --color-grey: #fdf6ee;
+  --color-light-grey: #f6ece0;
+  /* font-size */
+  --font-sm: 0.8685714286rem;
+  /* font-family */
+  --font-main: "DINNextLTArabic";
+
+  /* plugins */
+  --mm-ocd-width: calc(100% - 51px);
+}
