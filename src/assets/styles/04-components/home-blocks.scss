@@ -1,5 +1,5 @@
 /*
-  Block Title
+  Block Title (generic — used across twilight blocks)
 */
 .s-block{
   &__title{
@@ -9,12 +9,16 @@
       @apply rtl:pl-8 ltr:pr-8;
     }
 
-    h2{ 
+    h2{
       @apply text-lg font-bold relative leading-[1.2];
+      color: var(--char);
+      font-family: var(--font-arabic);
+      font-weight: 900;
     }
 
     p{
       @apply text-sm opacity-60 mt-2 line-clamp-1 sm:line-clamp-2 rtl:md:pl-16 ltr:md:pr-16;
+      color: var(--text);
     }
 
     &-nav{
@@ -24,6 +28,7 @@
 
   &__display-all{
     @apply inline-flex items-center gap-2 text-sm font-bold opacity-80 hover:opacity-100;
+    color: var(--teal);
 
     i{
       @apply ltr:rotate-180 inline-block;
@@ -31,133 +36,974 @@
   }
 }
 
+/* Sufra: alternate background section */
+.s-block--alt-bg{
+  @apply bg-[color:var(--color-grey)] py-10 sm:py-14 mt-0;
+}
+
 /*
-  Main slider
+  Taghmesa: Section title (eyebrow + h2 + desc + link)
 */
-.s-block--hero-slider{
-  .swiper-slide{
-    @apply h-80 sm:h-96 lg:h-116 xl:h-132 relative bg-gray-800;
+.section-title{
+  @apply mb-8;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
 
-    .swiper-lazy{
-      &:after{
-        @apply content-[''] absolute transition top-0 bg-black/60 w-full h-full;
-      }
-    }
-
-	.overlay-bg{
-		&:after{
-		  @apply content-[''] absolute top-0 bg-black/60 w-full h-full;
-		}
-	  }
-  }
-}
-
-/* Banner Block */
-.banner {
-  @media screen and (min-width: 768px) {
-    &:hover {
-      .banner__title {
-        animation: toTopFromBottom 0.9s;
-      }
-
-      .banner__description {
-        animation: delayKeyframe 0.3s, toTopFromBottom 0.9s 0.3s;
-      }
-    }
+  span{
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--teal);
+    margin-bottom: 6px;
   }
 
-  &--fixed{
-    img{
-      @apply w-full object-cover rounded-md border-none block bg-gray-100;
-    }
-  }
-}
-
-/* Square Banner Block */
-.banner-entry{
-  @apply h-[200px] bg-gray-100 text-white text-center p-3 xs:p-4 rounded-md overflow-hidden relative bg-cover bg-no-repeat bg-center;
-
-  article{
-    @apply flex flex-col items-center justify-center h-full p-2.5 
-  }
-  
-  &.square-photos h3{
-    @apply h-full px-3;
-  }
-
-  h3{
-    @apply flex flex-col justify-center xs:px-1;
-   
-    &.text-with-border{
-      @apply xs:border border-dashed border-gray-200 rounded-md;
-
-      span{
-        @apply line-clamp-2;
-      }
-    }
+  h2{
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.25;
+    color: var(--char);
+    font-family: var(--font-arabic);
+    margin: 0;
   }
 
   p{
-    @apply line-clamp-2 opacity-80;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 380px;
+    margin: 0;
   }
 
-  h3,p{
-    @apply lg:opacity-0  transition-all duration-300 relative z-1 lg:translate-y-6;
+  &__link{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--teal);
+    white-space: nowrap;
+
+    &:hover{
+      color: var(--teal-deep);
+    }
+
+    svg{
+      flex-shrink: 0;
+
+      [dir="ltr"] &{
+        transform: scaleX(-1);
+      }
+    }
   }
-  
+}
+
+/*
+  Taghmesa: Hero (intro + carousel)
+*/
+.s-block--hero-slider.hero{
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin-top: 0;
+  background: var(--bg);
+
+  .container{
+    position: relative;
+    z-index: 1;
+    padding-top: clamp(16px, 3vw, 32px);
+    padding-bottom: clamp(16px, 3vw, 32px);
+  }
+}
+
+.hero-doodles{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  z-index: 0;
+}
+
+.hero-doodle{
+  position: absolute;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+
+  &--citrus{
+    width: 70px;
+    top: 18px;
+    inset-inline-start: 22px;
+    color: #ed8b2d;
+    transform: rotate(-10deg);
+  }
+
+  &--leaf{
+    width: 82px;
+    top: 40px;
+    inset-inline-end: 6%;
+    color: var(--teal);
+    transform: rotate(8deg);
+  }
+
+  &--chilli{
+    width: 78px;
+    bottom: 14px;
+    inset-inline-start: 4%;
+    color: #8a5638;
+    transform: rotate(12deg);
+  }
+}
+
+.hero-inner{
+  position: relative;
+  display: grid;
+  gap: 28px;
+  padding: clamp(28px, 5vw, 54px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+
+  @media (min-width: 980px){
+    grid-template-columns: 1fr 1.05fr;
+    align-items: center;
+  }
+}
+
+.hero-intro{
+  &__eyebrow{
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+
+  &__title{
+    font-size: clamp(30px, 6vw, 48px);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--char);
+    font-family: var(--font-arabic);
+    margin: 0 0 16px;
+
+    em{
+      font-style: normal;
+      color: var(--teal);
+      position: relative;
+      white-space: nowrap;
+
+      &::after{
+        content: '';
+        position: absolute;
+        inset-inline-start: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 5px;
+        border-radius: 3px;
+        background: linear-gradient(90deg, var(--teal) 55%, transparent 55%) 0 100% / 12px 5px repeat-x;
+        opacity: 0.55;
+      }
+    }
+  }
+
+  &__desc{
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text);
+    max-width: 46ch;
+    margin: 0 0 24px;
+  }
+
+  salla-search{
+    display: block;
+    max-width: 420px;
+  }
+
+  .s-search-placeholder-wrapper{
+    display: block;
+    width: 100%;
+  }
+
+  .s-search-input.s-search-placeholder-trigger{
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--muted);
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow-sm);
+    cursor: text;
+
+    &:hover{
+      border-color: color-mix(in srgb, var(--teal) 45%, var(--border));
+    }
+  }
+
+  .s-search-icon-wrap{
+    color: var(--teal);
+    display: inline-flex;
+  }
+}
+
+/* Hero carousel */
+.hero-carousel{
+  position: relative;
+  min-width: 0;
+
+  &__viewport{
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 8px 4px 20px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+
+  &__controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  &__btn{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    &:hover{
+      background: var(--aqua);
+      color: var(--teal);
+      border-color: color-mix(in srgb, var(--teal) 40%, transparent);
+    }
+  }
+
+  &__dots{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #d4d6d1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease;
+
+    &.active{
+      width: 24px;
+      background: var(--clay);
+    }
+  }
+}
+
+.hero-slide{
+  position: relative;
+  flex: 0 0 min(78%, 320px);
+  scroll-snap-align: center;
+  border-radius: 24px;
+  min-height: 220px;
+  padding: 22px;
+  display: flex;
+  overflow: hidden;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+
+  &__body{
+    position: relative;
+    z-index: 1;
+    max-width: 62%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  &__eyebrow{
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    opacity: 0.92;
+  }
+
+  &__title{
+    font-size: clamp(22px, 3.6vw, 30px);
+    font-weight: 900;
+    line-height: 1.3;
+    color: #fff;
+    font-family: var(--font-arabic);
+    margin: 0;
+  }
+
+  &__desc{
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: 0.92;
+    margin: 0;
+  }
+
+  &__img{
+    position: absolute;
+    left: -15px;
+    bottom: -22px;
+    width: 190px;
+    height: 178px;
+    border: 8px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    object-fit: cover;
+    transform: rotate(-7deg);
+  }
+
+  &.tone-clay{ background: linear-gradient(135deg, #ef8863, #c8663c); }
+  &.tone-teal{ background: linear-gradient(135deg, #0fb4c7, #006e7a); }
+  &.tone-gold{ background: linear-gradient(135deg, #e3b35c, #c98d2e); }
+}
+
+/*
+  Taghmesa: Features strip (emoji-chip pills + paper-art)
+*/
+.s-block--features.features{
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  padding: 40px 0 8px;
+  background: var(--bg);
+
+  .container{
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.features-paper-art{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+
+  .features-paper-trail{
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    opacity: 0.25;
+  }
+
+  circle{
+    fill: var(--clay);
+    opacity: 0.55;
+  }
+
+  .features-paper-citrus{
+    fill: none;
+    stroke: var(--teal);
+    opacity: 0.35;
+  }
+
+  .features-paper-leaf{
+    fill: none;
+    stroke: var(--teal);
+    opacity: 0.35;
+  }
+}
+
+.features-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px 16px;
+
+  @media (min-width: 640px){
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.features-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 12px;
+
+  &__icon{
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--aqua);
+    color: var(--teal);
+    font-size: 24px;
+  }
+
+  strong{
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--deep);
+    font-family: var(--font-arabic);
+  }
+
+  small{
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 22ch;
+  }
+}
+
+@media (max-width: 639px){
+  .features-list{
+    grid-template-columns: 1fr;
+  }
+
+  .features-item{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    text-align: start;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+
+    &__icon{
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    small{
+      display: none;
+    }
+  }
+}
+
+/*
+  Taghmesa: Category cards (dark photo cards)
+*/
+.category-section{
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+  padding-block: clamp(36px, 6vw, 72px);
+
+  .section-title{
+    margin-bottom: 32px;
+  }
+}
+
+.category-heading{
+  span{
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  h2{
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.25;
+    color: var(--char);
+    font-family: var(--font-arabic);
+    margin: 0;
+  }
+
+  p{
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 380px;
+    margin: 0;
+  }
+}
+
+.category-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+
+  @media (max-width: 767px){
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+.category-card{
+  position: relative;
+  min-height: 264px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--deep);
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(4, 59, 62, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
   &:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(4, 59, 62, 0.14);
+
+    .category-card__media img{
+      transform: scale(1.04);
+    }
+
+    .category-card__arrow{
+      background: var(--clay);
+      color: #fff;
+    }
+  }
+
+  &::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.94), transparent 60%);
+  }
+
+  &__media{
+    position: absolute;
+    inset: 0;
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+
+  &__fallback{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--teal-deep), var(--deep));
+    color: #fff;
+    font-size: 42px;
+  }
+
+  &__body{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 94px;
+    padding: 16px 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__body > span:first-child{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__body small{
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.74);
+
+    i{
+      font-size: 14px;
+    }
+  }
+
+  &__body strong{
+    font-size: 18px;
+    font-weight: 500;
+    font-family: var(--font-arabic);
+    color: #fff;
+  }
+
+  &__arrow{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.25s ease, color 0.25s ease;
+
+    svg{
+      [dir="ltr"] &{
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  @media (max-width: 767px){
+    min-height: 220px;
+
+    &__arrow{
+      display: none;
+    }
+  }
+}
+
+/*
+  Taghmesa: Featured products section
+*/
+.featured-section{
+  padding-block: clamp(36px, 6vw, 72px);
+  background: var(--bg);
+}
+
+.featured-heading{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 32px;
+}
+
+/*
+  Taghmesa: Dish cards (daily menu)
+*/
+.dish-card{
+  @apply bg-white rounded-large overflow-hidden border border-gray-100 transition duration-300;
+  background: var(--surface);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+
+  &__media{
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--aqua);
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+
+  &:hover &__media img{
+    transform: scale(1.05);
+  }
+
+  &__body{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+
     h3{
-      @apply opacity-100 translate-y-0;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--deep);
+      font-family: var(--font-arabic);
+      margin: 0;
     }
 
     p{
-      @apply opacity-80 translate-y-0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
     }
   }
 
-  .two-row &{
-    &:first-child{
-      @apply md:h-full sm:col-span-1 sm:row-span-2 p-5;
+  &__cta{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--teal);
 
-      > a{
-        @apply opacity-100;
+    i{
+      transition: transform 0.25s ease;
+
+      [dir="ltr"] &{
+        transform: rotate(180deg);
       }
+    }
 
-      h3{
-        @apply text-2xl leading-12;
+    &:hover i{
+      transform: translateX(3px);
+
+      [dir="ltr"] &{
+        transform: rotate(180deg) translateX(-3px);
       }
     }
   }
 }
 
-.has-overlay{ 
-  &:after{
-    @apply content-[''] h-full w-full bg-black/60 absolute top-0 left-0 transition-colors duration-300;
+/*
+  Taghmesa: Special offer banner (deep teal panel)
+*/
+.s-block--offer-banner{
+  margin-top: 0;
+
+  .container{
+    padding-block: clamp(8px, 2vw, 16px);
+  }
+}
+
+.offer-banner{
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--deep), #0a2a30);
+  color: #fff;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(40px, 7vw, 80px) 24px;
+  box-shadow: var(--shadow-lg);
+
+  &::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 18px 18px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 70%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 70%);
   }
 
-  &.with-hover{
-    &:after{
-      transition: opacity .3s;
-      opacity: 0;
-    }
+  &__bg{
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.25;
+  }
+
+  &__content{
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__tag{
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: #ffe1cf;
+    background: rgba(200, 134, 102, 0.25);
+    border: 1px solid rgba(255, 225, 207, 0.3);
+    border-radius: 999px;
+    padding: 6px 16px;
+  }
+
+  &__title{
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900;
+    color: #fff;
+    font-family: var(--font-arabic);
+    margin: 0;
+  }
+
+  &__desc{
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  &__cta{
+    margin-top: 8px;
+    background: var(--teal);
+    border: none;
+    color: #fff;
+
     &:hover{
-      &:after{
-      opacity: 1;
+      opacity: 0.9;
     }
-    }
-  }
-
-  &:hover:after{
-    @apply bg-black/70
   }
 }
 
+/*
+  Taghmesa: About the kitchen
+*/
+.s-block--about{
+  .about-chef__media{
+    position: relative;
+
+    &::before{
+      content: '';
+      position: absolute;
+      inset-inline-start: 16px;
+      inset-inline-end: -16px;
+      top: 16px;
+      bottom: -16px;
+      border: 1.5px dashed color-mix(in srgb, var(--teal) 45%, transparent);
+      border-radius: 24px;
+      pointer-events: none;
+    }
+
+    img{
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .about-chef__badge{
+      @apply absolute bottom-4 rtl:right-4 ltr:left-4 w-14 h-14 rounded-full flex items-center justify-center;
+      background: var(--teal);
+      color: #fff;
+      z-index: 2;
+
+      i{
+        @apply text-2xl;
+      }
+    }
+  }
+
+  .s-block__eyebrow-title{
+    @apply text-2xl sm:text-3xl font-bold relative pb-4 mb-6;
+    color: var(--char);
+    font-family: var(--font-arabic);
+    font-weight: 900;
+
+    &:after{
+      content: '';
+      @apply absolute bottom-0 rtl:right-0 ltr:left-0 h-1 rounded-full;
+      width: 42px;
+      background: var(--clay);
+    }
+  }
+
+  .about-chef__text{
+    color: var(--text);
+  }
+}
+
+/*
+  Taghmesa: Testimonials
+*/
+.s-block--testimonials{
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+  padding-block: clamp(36px, 6vw, 72px);
+}
+
+.testimonial-card{
+  @apply rounded-large p-6 flex flex-col gap-4;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  &__stars{
+    @apply flex gap-1 text-lg;
+    color: #f5b301;
+  }
+
+  &__text{
+    @apply leading-7 flex-1;
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  &__author{
+    @apply flex items-center gap-3 pt-4 border-t;
+    border-color: var(--border);
+
+    img{
+      @apply w-10 h-10 rounded-full object-cover;
+    }
+
+    span{
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--deep);
+      font-family: var(--font-arabic);
+    }
+  }
+}
+
+/*
+  Banner / offers slider blocks (generic twilight)
+*/
+.slider-with-bg-block{
+  @apply bg-gray-100 pb-8 sm:pb-16 mt-8 sm:mt-16 first-of-type:mt-0;
+
+  .slider-bg{
+    @apply h-96 sm:h-116 transition-opacity bg-center bg-cover text-white relative;
+
+    &:before{
+      content: '';
+      @apply h-full w-full bg-black opacity-60 absolute top-0 left-0;
+    }
+  }
+
+  .s-slider-block{
+    &__title-right{
+      @apply hidden;
+    }
+
+    &__title-left{
+      @apply w-full flex justify-between;
+    }
+
+    &__display-all{
+      @apply block btn btn--outline light btn--rounded-full;
+      @apply grow-0 bg-transparent text-white #{!important};
+    }
+  }
+}
 
 /* Full banner block */
 .full-banner-entry {
-  @apply row-span-2 h-80 md:h-96 lg:h-116 xl:h-132 bg-stone-200 transition-opacity hover:opacity-95 bg-center bg-cover text-white text-center p-5 overflow-hidden relative bg-fixed;
-
-  background-attachment: initial;
+  @apply row-span-2 h-80 md:h-96 lg:h-116 xl:h-132 bg-stone-200 transition-opacity hover:opacity-95 bg-center bg-cover text-white text-center p-5 overflow-hidden relative;
 
   &::after,
   &::before {
@@ -200,104 +1046,94 @@
   }
 }
 
-/*
-  Tabs Block
-*/
-.tabs-wrapper{
-  .tabs__item{
-    @apply hidden transition-all duration-300;
+/* Square Banner Block */
+.banner-entry{
+  @apply h-[200px] text-white text-center p-3 xs:p-4 rounded-md overflow-hidden relative bg-cover bg-no-repeat bg-center;
+  background-color: var(--deep);
 
-    &.is-active{
-      @apply block;
-    }
-  }
-}
-
-.s-block--tabs-produtcs{
-  .tabs{
-    @apply text-center pb-6 sm:pb-10 px-5 -mx-2.5 sm:-mx-5 lg:mx-0 rtl:space-x-reverse space-x-1 md:space-x-4 whitespace-nowrap overflow-x-auto;
+  article{
+    @apply flex flex-col items-center justify-center h-full p-2.5
   }
 
-  .tab-trigger{
-    @apply text-gray-800;
-    &.is-active button{
-      @apply text-primary-reverse bg-primary-dark border-primary-dark;
-    }
+  &.square-photos h3{
+    @apply h-full px-3;
   }
-}
 
-.s-block--special-products{
-  .tabs{
-    @apply mb-4 sm:mb-0 rtl:space-x-reverse space-x-2 md:space-x-8 whitespace-nowrap overflow-x-auto;
+  h3{
+    @apply flex flex-col justify-center xs:px-1;
+    font-family: var(--font-arabic);
+    color: #fff;
 
-    &__item{
-      @apply flex-1 gap-2.5 sm:gap-8;
+    &.text-with-border{
+      @apply xs:border border-dashed border-gray-200 rounded-md;
 
-      &.is-active{
-        display: grid;
+      span{
+        @apply line-clamp-2;
       }
     }
   }
 
-  .tab-trigger{
-    @apply text-gray-800 font-bold leading-7;
+  p{
+    @apply line-clamp-2 opacity-80;
+  }
 
-    &.is-active button{
-      @apply text-primary-dark border-primary-dark;
+  h3,p{
+    @apply lg:opacity-0  transition-all duration-300 relative z-1 lg:translate-y-6;
+  }
+
+  &:hover{
+    h3{
+      @apply opacity-100 translate-y-0;
+    }
+
+    p{
+      @apply opacity-80 translate-y-0;
+    }
+  }
+
+  .two-row &{
+    &:first-child{
+      @apply md:h-full sm:col-span-1 sm:row-span-2 p-5;
+
+      > a{
+        @apply opacity-100;
+      }
+
+      h3{
+        @apply text-2xl leading-12;
+      }
     }
   }
 }
 
-.s-block--tabs-produtcs,
-.s-block--special-products {
-  &:not(.tabs-initialized) {
-    .tabs-wrapper > div:not(:first-child) {
-      display: none;
+/* Banner Block */
+.banner {
+  @media screen and (min-width: 768px) {
+    &:hover {
+      .banner__title {
+        animation: toTopFromBottom 0.9s;
+      }
+
+      .banner__description {
+        animation: delayKeyframe 0.3s, toTopFromBottom 0.9s 0.3s;
+      }
+    }
+  }
+
+  &--fixed{
+    img{
+      @apply w-full object-cover rounded-md border-none block bg-gray-100;
     }
   }
 }
 
-/* feature products*/
-.s-block--features-products {
-  &.two-cols {
-    .inner {
-      display: grid;
-      @apply lg:grid-cols-2 gap-5;
-    }
-  }
-}
-
-/* slider with bg block */
-.s-block--slider-with-bg{
-  @apply bg-gray-100 pb-8 sm:pb-16 mt-8 sm:mt-16 first-of-type:mt-0;
-
-  .slider-bg{
-    @apply h-96 sm:h-116 transition-opacity bg-center bg-cover text-white relative;
-
-    &:before{
-      content: '';
-      @apply h-full w-full bg-black opacity-60 absolute top-0 left-0;
-    }
-  }
-
-  .s-slider-block{
-    &__title-right{
-      @apply hidden;
-    }
-
-    &__title-left{
-      @apply w-full flex justify-between;
-    }
-
-    &__display-all{
-      @apply block btn btn--outline light btn--rounded-full;
-      @apply grow-0 bg-transparent text-white #{!important};
-    }
-  }
+/* offers slider */
+.slide--offer-entry {
+  @apply bg-white rounded-md h-36 text-center flex flex-col items-center justify-between text-gray-600 transition duration-500 hover:shadow-default border border-gray-200;
 }
 
 /*
-  Main Links Block
+  Main Links / categories slider (generic twilight)
 */
 .slide--cat-entry {
   @apply bg-white rounded-md h-36 p-3 text-center flex flex-col items-center justify-center transition duration-500 hover:shadow-default hover:text-gray-500 border border-gray-100;
@@ -308,17 +1144,13 @@
 
   h2 {
     @apply font-bold text-sm;
+    color: var(--char);
   }
 }
 
 /*
-  offers slider
+  Generic s-block containers
 */
-.slide--offer-entry {
-  @apply bg-white rounded-md h-36 text-center flex flex-col items-center justify-between text-gray-600 transition duration-500 hover:shadow-default border border-gray-200;
-}
-
-
 .s-block {
   @apply mt-8 sm:mt-16;
 
@@ -354,60 +1186,16 @@
       @apply font-bold text-base sm:text-lg sm:mb-4 relative z-1 min-h-[28px];
     }
   }
-
-  &--features{
-    &__item{
-      @apply cursor-pointer bg-white transition-shadow duration-500 hover:shadow-default rounded-md flex-grow flex flex-col items-center px-4 py-8 md:px-8 text-center;
-
-      &:first-child{
-        @apply col-span-2 md:col-span-1;
-      }
-
-      .feature-icon{
-        @apply mb-3 bg-primary w-16 h-16 rounded-full flex items-center justify-center overflow-hidden;
-
-        i{
-          @apply text-primary-reverse text-3xl;
-        }
-      }
-
-      h2{
-        @apply font-bold text-sm text-gray-800 mb-1;
-      }
-
-      p{
-        @apply text-sm text-gray-500;
-      }
-
-      &:hover {
-        .feature-icon i {
-          animation: toRightFromLeft 0.3s forwards;
-        }
-      }
-    }
-  }
 }
-
-// repeated block with narrow top spacing
-.s-block--features + .s-block--features,
-.s-block--fixed-banner + .s-block--fixed-banner,
-.s-block--banners + .s-block--banners {
-  margin-top: 2em;
-}
-
-.s-block--tabs-produtcs + .s-block--tabs-produtcs {
-  padding-top: 2em;
-}
-
 
 .s-blocks-wrapper{
   @apply empty:hidden;
 
-  :not(.s-information-page) .s-block{ 
+  :not(.s-information-page) .s-block{
     @apply first:mt-0;
   }
 
-  &:empty {   
+  &:empty {
     + .container--products-list,
     + .container--product-details{
       @apply mt-0 #{!important}
@@ -422,168 +1210,8 @@
 }
 
 .container--breadcrumbs{
-  &, 
+  &,
   & + .s-blocks-wrapper{
     @apply mt-0 #{!important}
-  }
-}
-
-/*
-  Sufra: alternate cream background section
-*/
-.s-block--alt-bg{
-  @apply bg-[color:var(--color-grey)] py-10 sm:py-14 mt-0;
-}
-
-/*
-  Sufra: hero slider
-*/
-.s-block--hero-slider {
-  .hero-slider__eyebrow{
-    @apply text-xs sm:text-sm tracking-wide uppercase bg-black/30 backdrop-blur rounded-full px-4 py-1.5;
-  }
-
-  .hero-slider__title{
-    @apply text-2xl sm:text-4xl lg:text-title-size;
-  }
-
-  .hero-slider__desc{
-    @apply text-sm sm:text-base text-gray-100;
-  }
-}
-
-/*
-  Sufra: quick menu links
-*/
-.quick-menu__item{
-  @apply bg-white rounded-large border border-gray-100 shadow-default flex flex-col items-center justify-center gap-3 px-4 py-6 text-center transition duration-300 hover:-translate-y-1 hover:border-[color:var(--color-primary-light)];
-
-  .quick-menu__icon{
-    @apply w-16 h-16 rounded-full flex items-center justify-center bg-[color:var(--color-grey)] text-[color:var(--color-primary)] transition-colors duration-300;
-
-    i{
-      @apply text-3xl;
-    }
-  }
-
-  &:hover .quick-menu__icon{
-    @apply bg-[color:var(--color-primary)] text-[color:var(--color-primary-reverse)];
-  }
-
-  .quick-menu__title{
-    @apply font-bold text-sm text-gray-800;
-  }
-}
-
-/*
-  Sufra: dish cards (daily menu)
-*/
-.dish-card{
-  @apply bg-white rounded-large overflow-hidden border border-gray-100 shadow-default transition duration-300 hover:-translate-y-1;
-
-  &__media{
-    @apply h-44 overflow-hidden bg-gray-100;
-
-    img{
-      @apply transition-transform duration-500 group-hover:scale-105;
-    }
-  }
-
-  &__body{
-    @apply p-5;
-
-    h3{
-      @apply font-bold text-base text-gray-900 mb-1.5;
-    }
-
-    p{
-      @apply text-sm text-gray-500 line-clamp-2 mb-4;
-    }
-  }
-
-  &__cta{
-    @apply inline-flex items-center gap-1.5 text-sm font-bold text-[color:var(--color-primary)];
-
-    i{
-      @apply ltr:rotate-180 inline-block;
-    }
-  }
-}
-
-/*
-  Sufra: special offer banner
-*/
-.offer-banner{
-  @apply min-h-[340px];
-
-  &__overlay{
-    @apply bg-gradient-to-b from-black/70 via-black/50 to-black/70;
-  }
-
-  &__tag{
-    @apply text-xs sm:text-sm tracking-widest uppercase text-amber-300 bg-black/30 rounded-full px-4 py-1.5;
-  }
-
-  &__title{
-    @apply text-white text-2xl sm:text-4xl font-bold;
-  }
-
-  &__desc{
-    @apply text-gray-100 text-sm sm:text-base;
-  }
-
-  &__cta{
-    @apply bg-[color:var(--color-primary)] text-white hover:opacity-90;
-  }
-}
-
-/*
-  Sufra: about the chef
-*/
-.s-block--about{
-  .about-chef__media{
-    img{
-      @apply aspect-[4/3];
-    }
-
-    .about-chef__badge{
-      @apply absolute bottom-4 rtl:right-4 ltr:left-4 w-14 h-14 rounded-full bg-[color:var(--color-primary)] text-[color:var(--color-primary-reverse)] flex items-center justify-center;
-
-      i{
-        @apply text-2xl;
-      }
-    }
-  }
-
-  .s-block__eyebrow-title{
-    @apply text-2xl sm:text-3xl font-bold relative pb-4 mb-6;
-
-    &:after{
-      content: '';
-      @apply absolute bottom-0 rtl:right-0 ltr:left-0 w-16 h-1 rounded-full bg-[color:var(--color-primary)];
-    }
-  }
-
-  .about-chef__text{
-    @apply text-gray-600;
-  }
-}
-
-/*
-  Sufra: testimonials
-*/
-.testimonial-card{
-  @apply bg-white rounded-large border border-gray-100 shadow-default p-6 flex flex-col gap-4;
-
-  &__stars{
-    @apply flex gap-1 text-lg;
-  }
-
-  &__text{
-    @apply text-gray-700 leading-7 flex-1;
-  }
-
-  &__author{
-    @apply flex items-center gap-3 pt-4 border-t border-gray-100;
   }
 }

@@ -17,6 +17,7 @@ class App extends AppHelpers {
     if (header_is_sticky) {
       this.initiateStickyMenu();
     }
+    this.initThemeToggle();
     this.initAddToCart();
     this.initiateDropdowns();
     this.initiateModals();
@@ -196,6 +197,17 @@ isElementLoaded(selector){
     let height = this.element('#mainnav .inner').clientHeight,
       header = this.element('#mainnav');
     header.style.height = height + 'px';
+  }
+
+  initThemeToggle() {
+    const html = document.documentElement;
+    this.onClick('[data-testid="store-header-theme-toggle"]', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      try {
+        localStorage.setItem('sufra-theme', isDark ? 'light' : 'dark');
+      } catch (e) {}
+    });
   }
 
   initiateDropdowns() {

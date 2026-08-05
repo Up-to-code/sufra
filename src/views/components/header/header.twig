@@ -17,6 +17,46 @@
     </div>
   {% endif %}
 
+  {# Main Nav — Taghmesa style #}
+  <div id="mainnav" class="main-nav-container flex items-center">
+      <div class="inner w-full">
+          <div class="container">
+              <div class="flex items-center justify-between relative">
+                  <div class="flex items-center">
+                      <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none rtl:ml-4 ltr:mr-4" href="#mobile-menu" aria-label="Open-menu">
+                        <i class="sicon-menu text-primary text-2xl"></i>
+                      </a>
+                      <a data-testid="store-header-logo" class="navbar-brand" href="{{ store.url }}">
+                          <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo|cdn(175) }}" alt="{{ store.name }} logo">
+                          <span class="navbar-brand__copy">
+                            <b>{{ store.name }}</b>
+                            {% if store.slogan %}<small>{{ store.slogan }}</small>{% endif %}
+                          </span>
+                          {% if is_page('index') %}
+                            <h1 class="sr-only">{{ store.name }}</h1>
+                          {% else %}
+                            <h2 class="sr-only">{{ store.name }}</h2>
+                          {% endif %}
+                      </a>
+                  </div>
+                  <custom-main-menu></custom-main-menu>
+                  <div class="nav-actions">
+                      <div class="nav-actions__inner">
+                          <salla-user-menu data-testid="store-header-user-menu" avatar-only show-header show-trigger class="nav-actions__user"></salla-user-menu>
+                          <button class="theme-toggle" data-testid="store-header-theme-toggle" type="button" aria-label="تبديل المظهر">
+                            <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+                            <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                          </button>
+                          <salla-cart-summary data-testid="store-header-cart" class="nav-actions__cart">
+                            <i slot="icon" class="sicon-shopping-bag"></i>
+                          </salla-cart-summary>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
   {# Top Nav #}
   <div class="top-navbar">
     <div class="container flex justify-between">
@@ -49,35 +89,5 @@
 
       <salla-contacts data-testid="store-header-contacts" is-header></salla-contacts>
     </div>
-  </div>
-
-  {# Main Nav #}
-  <div id="mainnav" class="main-nav-container shadow-default bg-white flex items-center">
-      <div class="inner bg-inherit w-full">
-          <div class="container">
-              <div class="flex items-stretch justify-between relative">
-                  <div class="flex items-center">
-                      <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none rtl:ml-4 ltr:mr-4" href="#mobile-menu" aria-label="Open-menu">
-                        <i class="sicon-menu text-primary text-2xl"></i>
-                      </a>
-                      <a data-testid="store-header-logo" class="navbar-brand" href="{{ store.url }}">
-                          <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo|cdn(175) }}" alt="{{ store.name }} logo">
-                          {% if is_page('index') %}
-                            <h1 class="sr-only">{{ store.name }}</h1>
-                          {% else %}
-                            <h2 class="sr-only">{{ store.name }}</h2>
-                          {% endif %}
-                      </a>
-                      <custom-main-menu></custom-main-menu>
-                  </div>
-                  <div class="flex items-center justify-end my-2.5">
-                      <salla-user-menu data-testid="store-header-user-menu" avatar-only show-header show-trigger></salla-user-menu>
-                      <salla-cart-summary data-testid="store-header-cart" class="ml-4 rtl:ml-[unset] rtl:mr-4">
-                        <i slot="icon" class="header-btn__icon icon sicon-shopping-bag"></i>
-                      </salla-cart-summary>
-                  </div>
-              </div>
-          </div>
-      </div>
   </div>
 </header>
