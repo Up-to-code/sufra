@@ -67,3 +67,7 @@ Open **My Themes → Sufra → Settings** in the [Partners portal](https://porta
 ## License
 
 MIT — based on [SallaApp/theme-raed](https://github.com/SallaApp/theme-raed).
+
+## Project links
+
+[Source](https://github.com/Up-to-code/sufra) · [Issues](https://github.com/Up-to-code/sufra/issues) · [Public project directory](https://github.com/qentrah/.github/blob/main/profile/PROJECTS.md)
